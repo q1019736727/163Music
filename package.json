@@ -1,0 +1,23 @@
+{
+  "name": "163music",
+  "version": "1.0.0",
+  "description": "包含一个简易的Node服务器端",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/q1019736727/163Music.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/q1019736727/163Music/issues"
+  },
+  "homepage": "https://github.com/q1019736727/163Music#readme",
+  "dependencies": {
+    "jQuery": "^1.7.4"
+  }
+}

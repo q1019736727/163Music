@@ -1,0 +1,64 @@
+*{padding: 0;margin: 0}
+*{box-sizing: border-box}
+*::before{box-sizing: border-box}
+*::after{box-sizing: border-box}
+ul,ol{list-style: none}
+a{color: inherit;text-decoration: none}
+.clearfix::after{content: '';display: block;clear: both}
+.page{
+  display: flex;
+  height: 100vh;
+  .aside-wrapper{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    .songtitle{
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #ededed;
+    }
+    ol{
+      li{
+        padding: 10px;
+        border-bottom: 1px solid #ededed;
+        &.active{
+          background: #ededed;
+        }
+      }
+    }
+    .dragUploadMusic{
+      background: red;
+    }
+  }
+  .addmusicWrapper{
+    padding: 15px;
+    background: #ededed;
+    flex-grow: 1;
+    h2{
+      padding: 10px;
+    }
+    .addSongForm{
+      padding: 10px;
+      div{
+        padding: 15px 0;
+        line-height: 30px;
+        input[type=text]{
+          margin-left: 10px;
+          line-height: 25px;
+          font-size: 15px;
+          border: none;
+          &:focus{
+            outline: none;
+          }
+        }
+      }
+      input[type=submit]{
+        padding: 10px;
+      }
+    }
+
+
+  }
+
+
+}

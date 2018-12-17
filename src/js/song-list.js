@@ -24,7 +24,14 @@
             this.view = view
             this.mode = model
             this.view.render()
+            this.bindEvents()
+        },
+        bindEvents:function(){
+            window.eventsHub.on('upload',(data)=>{
+                console.log('songList接收成功'+data.name+data.url)
+            })
         }
     }
     control.init(view,model)
+
 }

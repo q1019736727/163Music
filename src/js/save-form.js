@@ -29,4 +29,7 @@
         }
     }
     control.init(view,model)
+    window.eventsHub.on('upload',(data)=>{
+        console.log('addmusicWrapper接收成功'+data)
+    })
 }

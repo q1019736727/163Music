@@ -15,36 +15,14 @@
         <div class="songtitle">
             <h3>歌曲列表</h3>
         </div>
-        <ol>
-            <li class="active">歌曲1</li>
-            <li>歌曲2</li>
-            <li>歌曲3</li>
-            <li>歌曲4</li>
-            <li>歌曲5</li>
-            <li>歌曲6</li>
-            <li>歌曲7</li>
-            <li>歌曲8</li>
-            <li>歌曲9</li>
-        </ol>
-        <div class="dragUploadMusic">
-
-        </div>
+        <div id="songList" class="songList"></div>
+        <div class="dragUploadMusic" id="upArea"></div>
     </aside>
-    <div class="addmusicWrapper">
-        <h2>添加歌曲</h2>
-        <form id="addsongForm" class="addSongForm">
-            <div>
-                <label>曲名</label><input type="text">
-            </div>
-            <div>
-                <label>歌手</label><input type="text">
-            </div>
-            <div>
-                <label>外链</label><input type="text">
-            </div>
-            <input type="submit" value="添加">
-        </form>
-    </div>
+    <div class="addmusicWrapper" id="addmusicWrapper"></div>
 </div>
+<script src="js/song-list.js"></script>
+<script src="js/save-form.js"></script>
+<script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
+<script src="js/qiniu-upload.js"></script>
 </body>
 </html>

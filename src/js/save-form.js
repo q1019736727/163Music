@@ -2,34 +2,62 @@
     let model = {}
     let view = {
         el:'#addmusicWrapper',
+        init:function(){
+            this.$el = $(this.el)
+        },
         template:`
             <h2>添加歌曲</h2>
             <form id="addsongForm" class="addSongForm">
                 <div>
-                    <label>曲名</label><input type="text">
+                    <label>曲名</label><input type="text" value="__song__">
                 </div>
                 <div>
-                    <label>歌手</label><input type="text">
+                    <label>歌手</label><input type="text" value="__singer__">
                 </div>
                 <div>
-                    <label>外链</label><input type="text">
+                    <label>外链</label><input type="text" value="__url__">
                 </div>
                 <button class="save">保存</button>
             </form>
         `,
-        render(data){
-            $(this.el).html(this.template)
+        render(data = {}){//ES6语法,如果data为undefined,就初始化一个空的对象
+            let titlarr = ['song','singer','url']
+            let html = this.template
+            titlarr.map((string)=>{
+                html = html.replace(`__${string}__`, data[string] || '')
+            })
+            $(this.el).html(html)
         }
     }
     let control = {
         init(view,model){
             this.view = view
+            this.view.init()
             this.mode = model
             this.view.render()
+            this.bindEvents()
+        },
+        bindEvents:function () {
+            window.eventsHub.on('upload',(data)=>{
+                this.view.render(data)
+            })
+            this.upLoadmp3()
+        },
+        //上传mp3到leancloud
+        upLoadmp3:function () {
+            this.view.$el.on('submit','form',(e)=>{
+                e.preventDefault()
+                let $texts = this.view.$el.find('input[type=text]')
+                let songData = {
+                    song:$texts.eq(0).val(),
+                    singer:$texts.eq(1).val(),
+                    url:$texts.eq(2).val()
+                }
+                window.eventsHub.emit('creatSong',songData)
+            })
+
         }
     }
     control.init(view,model)
-    window.eventsHub.on('upload',(data)=>{
-        console.log('addmusicWrapper接收成功'+data)
-    })
+
 }

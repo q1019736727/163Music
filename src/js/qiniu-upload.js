@@ -37,7 +37,7 @@
                         var domain = up.getOption('domain');
                         var res = JSON.parse(info.response);
                         var sourceLink = 'http://' + domain +"/"+ encodeURIComponent(res.key); //获取上传成功后的文件的Url
-                        window.eventsHub.emit('upload',{name:file.name,singer:'',id:'',url:sourceLink})
+                        window.eventsHub.emit('upload',{song:file.name,singer:'',id:'',url:sourceLink})
                     },
                     'Error': function(up, err, errTip) {
                         //上传出错时，处理相关的事情

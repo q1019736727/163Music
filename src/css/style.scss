@@ -16,6 +16,9 @@ a{color: inherit;text-decoration: none}
       padding: 10px;
       text-align: center;
       border-bottom: 1px solid #ededed;
+      &.active{
+        background: #ededed;
+      }
     }
     .songList{
       flex-grow: 1;

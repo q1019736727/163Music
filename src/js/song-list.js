@@ -4,19 +4,19 @@
         el:'#songList',
         template:`
             <ol>
-                <li class="active">歌曲1</li>
-                <li>歌曲2</li>
-                <li>歌曲3</li>
-                <li>歌曲4</li>
-                <li>歌曲5</li>
-                <li>歌曲6</li>
-                <li>歌曲7</li>
-                <li>歌曲8</li>
-                <li>歌曲9</li>
             </ol>
         `,
-        render(data){
+        songsData:[],
+        render(data = {}){
             $(this.el).html(this.template)
+            let{song,singer,url} = data
+            if (song){
+                let $li = $('<li></li>').text(song)
+                this.songsData.push($li)
+                this.songsData.reverse().map(($ele)=>{
+                    $(this.el).find('ol').append($ele)
+                })
+            }
         }
     }
     let control = {
@@ -27,8 +27,8 @@
             this.bindEvents()
         },
         bindEvents:function(){
-            window.eventsHub.on('upload',(data)=>{
-                console.log('songList接收成功'+data.name+data.url)
+            window.eventsHub.on('creatSong',(data)=>{
+                this.view.render(data)
             })
         }
     }

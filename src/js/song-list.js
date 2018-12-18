@@ -1,9 +1,10 @@
 {
     let model = {
         songlist:[],
+        selectID: undefined,//选中li的id
         init:function () {
-            this.songlist = []
             var query = new AV.Query('Songs');
+            this.songlist = []
             return query.find().then((songs)=>{
                 songs.map((song)=>{
                     let item = {...song.attributes}
@@ -33,14 +34,29 @@
                 $(this.el).find('ol').append($li)
             })
         },
-        //渲染单个数据
-        // renderSingle(data={}){
-        //     let {song,singer,url} = data
-        //     let $li = $('<li></li>').text(song)
-        //     $(this.el).find('ol').prepend($li)
-        // }
+        update:function(updata,alldata,selectid){
+            for (let i=0;i<alldata.length;i++){
+                let temp = alldata[i]
+                if (temp.id === updata.id){
+                    alldata[i] = updata
+                    break;
+                }
+            }
+            $(this.el).html(this.template)
+            alldata.map((song)=>{
+                let $li = $('<li></li>').text(song.song).attr('data-song-id',song.id)
+                if ($li.attr('data-song-id') === selectid ){
+                    $li.addClass('active')
+                }
+                $(this.el).find('ol').append($li)
+            })
+            alert('编辑成功!')
+        },
+        deActive:function() {
+            this.$el.find('li').removeClass('active')
+        }
     }
-    let control = {
+    let controller = {
         init:function (view,model) {
             this.view = view
             this.model = model
@@ -51,31 +67,48 @@
         },
         bindEvents:function(){
             window.eventsHub.on('creatSong',(data)=>{
-                // this.view.renderSingle(data)
                 this.getSonglist()
                 window.eventsHub.emit('clearValue')//清空输入框
             })
+            window.eventsHub.on('upDataSong',(data)=>{
+                this.view.update(data,this.model.songlist,this.model.selectID)
+            })
             this.clickSong()
             this.getSonglist()
+            this.titleEvents()
         },
         getSonglist:function(){
-            this.model.init().then((songs)=>{
-                this.view.render(songs)
+            this.model.init().then(()=>{
+                this.view.render(this.model.songlist)
             })
         },
         clickSong:function () {
             this.view.$el.on('click','li',(e)=>{
                 $(e.currentTarget).addClass('active').siblings().removeClass('active')
                 $('.songtitle').removeClass('active')
+                let songs = this.model.songlist
+                for (let i=0;i<songs.length;i++){
+                    let song = songs[i]
+                    if (song.id === $(e.currentTarget).attr('data-song-id')) {
+                        this.model.selectID = song.id
+                        window.eventsHub.emit('songlistClick',JSON.parse(JSON.stringify(song)))
+                        break
+                    }
+                }
+            })
+        },
+        titleEvents:function() {
+            $('.songtitle').on('click',(e)=>{
+                $(e.currentTarget).addClass('active')
+                this.view.deActive()
                 window.eventsHub.emit('songlistClick',{
-                    song:$(e.currentTarget).text(),
+                    song:'',
                     singer:'',
                     url:'',
-                    id:$(e.currentTarget).attr('data-song-id')
+                    id:''
                 })
             })
         }
     }
-    control.init(view,model)
-
+    controller.init(view,model)
 }

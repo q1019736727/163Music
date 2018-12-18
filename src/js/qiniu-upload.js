@@ -65,7 +65,7 @@
             $(this.el).html(this.template)
         }
     }
-    let control = {
+    let controller = {
         init(view,model){
             this.view = view
             this.model = model
@@ -73,5 +73,5 @@
             this.model.init()
         }
     }
-    control.init(view,model)
+    controller.init(view,model)
 }

@@ -1,5 +1,35 @@
 {
-    let model = {}
+    let model = {
+        data:{
+            song:{
+                song:'',
+                singer:'',
+                url:'',
+                id:''
+            }
+        },
+        upLoad:function(data) {
+            var Songs = AV.Object.extend('Songs');
+            var song = new Songs();
+            for(let key in data){
+                song.set(key, data[key]);
+            }
+            return song.save().then(()=>{
+                Object.assign(this.data.song,data)
+                return this.data.song
+            });
+        },
+        update:function(data) {
+            var song = AV.Object.createWithoutData('Songs', data.id);
+            for(let key in data){
+                song.set(key ,data[key]);
+            }
+            return song.save().then(()=>{
+                Object.assign(this.data.song,data)
+                return this.data.song
+            });
+        }
+    }
     let view = {
         el:'#addmusicWrapper',
         init:function(){
@@ -26,24 +56,33 @@
             titlarr.map((string)=>{
                 html = html.replace(`__${string}__`, data[string] || '')
             })
+            if (data.id){
+                this.$el.find('h2').text('编辑歌曲')
+            }else{
+                this.$el.find('h2').text('添加歌曲')
+            }
             $(this.el).html(html)
         },
         clearValue:function () {
             $(this.el).find('input[type=text]').val('')
         },
         editValue({song,singer,url,id}){
-            let texts =  $(this.el).find('input[type=text]')
+            if (id){
+                this.$el.find('h2').text('编辑歌曲')
+            }else{
+                this.$el.find('h2').text('添加歌曲')
+            }            let texts =  $(this.el).find('input[type=text]')
             let titleArr = [song,singer,url]
             titleArr.forEach((value,index)=>{
                 texts.eq(index).val(titleArr[index])
             })
         }
     }
-    let control = {
+    let controller = {
         init(view,model){
             this.view = view
             this.view.init()
-            this.mode = model
+            this.model = model
             this.view.render()
             this.bindEvents()
         },
@@ -65,27 +104,27 @@
                 let songData = {
                     song:$texts.eq(0).val(),
                     singer:$texts.eq(1).val(),
-                    url:$texts.eq(2).val()
+                    url:$texts.eq(2).val(),
+                    id:this.model.data.song.id
                 }
-                var Songs = AV.Object.extend('Songs');
-                var song = new Songs();
-                for(let key in songData){
-                    song.set(key, songData[key]);
+                if (this.model.data.song.id){
+                    this.model.update(songData).then(()=>{
+                        window.eventsHub.emit('upDataSong',JSON.parse(JSON.stringify(this.model.data.song)))
+                    })
+                } else{
+                    this.model.upLoad(songData).then(()=>{
+                        window.eventsHub.emit('creatSong',JSON.parse(JSON.stringify(this.model.data.song)))
+                    })
                 }
-                song.save().then(function (data) {
-                    window.eventsHub.emit('creatSong',songData)
-                }, function (error) {
-                    console.error('Failed to create new object, with error message: ' + error.message);
-                });
             })
 
         },
         editSong(){
             window.eventsHub.on('songlistClick',(data)=>{
-                this.view.editValue(data)
+                Object.assign(this.model.data.song,data)
+                this.view.editValue(this.model.data.song)
             })
         }
     }
-    control.init(view,model)
-
+    controller.init(view,model)
 }

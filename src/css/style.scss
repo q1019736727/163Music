@@ -7,7 +7,11 @@ a{color: inherit;text-decoration: none}
 .clearfix::after{content: '';display: block;clear: both}
 .page{
   display: flex;
-  height: 100vh;
+  height: 800px;
+  max-width: 980px;
+  margin: 50px auto;
+  border: 1px solid #dedede;
+  border-radius: 5px;
   .aside-wrapper{
     width: 250px;
     display: flex;
@@ -19,6 +23,9 @@ a{color: inherit;text-decoration: none}
       &.active{
         background: #ededed;
       }
+      &:hover{
+        cursor: pointer;
+      }
     }
     .songList{
       flex-grow: 1;
@@ -28,6 +35,9 @@ a{color: inherit;text-decoration: none}
           border-bottom: 1px solid #ededed;
           &.active{
             background: #ededed;
+          }
+          &:hover{
+            cursor: pointer;
           }
         }
       }

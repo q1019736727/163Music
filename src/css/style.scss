@@ -5,6 +5,13 @@
 ul,ol{list-style: none}
 a{color: inherit;text-decoration: none}
 .clearfix::after{content: '';display: block;clear: both}
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
 .page{
   display: flex;
   height: 800px;
@@ -16,15 +23,23 @@ a{color: inherit;text-decoration: none}
     width: 250px;
     display: flex;
     flex-direction: column;
+    position: relative;
     .songtitle{
       padding: 10px;
       text-align: center;
       border-bottom: 1px solid #ededed;
       &.active{
-        background: #ededed;
+        background: #dedede;
       }
       &:hover{
         cursor: pointer;
+      }
+      svg{
+        position: absolute;
+        left: 30px;
+        width: 30px;
+        height: 30px;
+        top: 6px;
       }
     }
     .songList{
@@ -33,8 +48,10 @@ a{color: inherit;text-decoration: none}
         li{
           padding: 10px;
           border-bottom: 1px solid #ededed;
+          color: #5a636a;
+          font-family: 'Helvetica Neue';
           &.active{
-            background: #ededed;
+            background: #dedede;
           }
           &:hover{
             cursor: pointer;
@@ -59,7 +76,7 @@ a{color: inherit;text-decoration: none}
   }
   .addmusicWrapper{
     padding: 15px;
-    background: #ededed;
+    background: #dedede;
     flex-grow: 1;
     h2{
       padding: 10px;

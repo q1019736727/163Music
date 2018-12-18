@@ -21,6 +21,7 @@
                         });
                     },
                     'BeforeUpload': function(up, file) {
+                        window.eventsHub.emit('loadIng')
                         // 每个文件上传前，处理相关的事情
                     },
                     'UploadProgress': function(up, file) {
@@ -34,6 +35,7 @@
                         //    "key": "gogopher.jpg"
                         //  }
                         // 查看简单反馈
+                        window.eventsHub.emit('loadSuccess')
                         var domain = up.getOption('domain');
                         var res = JSON.parse(info.response);
                         var sourceLink = 'http://' + domain +"/"+ encodeURIComponent(res.key); //获取上传成功后的文件的Url

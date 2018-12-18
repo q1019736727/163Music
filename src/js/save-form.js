@@ -27,6 +27,16 @@
                 html = html.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(html)
+        },
+        clearValue:function () {
+            $(this.el).find('input[type=text]').val('')
+        },
+        editValue({song,singer,url,id}){
+            let texts =  $(this.el).find('input[type=text]')
+            let titleArr = [song,singer,url]
+            titleArr.forEach((value,index)=>{
+                texts.eq(index).val(titleArr[index])
+            })
         }
     }
     let control = {
@@ -41,7 +51,11 @@
             window.eventsHub.on('upload',(data)=>{
                 this.view.render(data)
             })
+            window.eventsHub.on('clearValue',()=>{
+                this.view.clearValue()
+            })
             this.upLoadmp3()
+            this.editSong()
         },
         //上传mp3到leancloud
         upLoadmp3:function () {
@@ -53,9 +67,23 @@
                     singer:$texts.eq(1).val(),
                     url:$texts.eq(2).val()
                 }
-                window.eventsHub.emit('creatSong',songData)
+                var Songs = AV.Object.extend('Songs');
+                var song = new Songs();
+                for(let key in songData){
+                    song.set(key, songData[key]);
+                }
+                song.save().then(function (data) {
+                    window.eventsHub.emit('creatSong',songData)
+                }, function (error) {
+                    console.error('Failed to create new object, with error message: ' + error.message);
+                });
             })
 
+        },
+        editSong(){
+            window.eventsHub.on('songlistClick',(data)=>{
+                this.view.editValue(data)
+            })
         }
     }
     control.init(view,model)

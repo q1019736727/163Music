@@ -50,7 +50,6 @@
                 }
                 $(this.el).find('ol').append($li)
             })
-            alert('编辑成功!')
         },
         deActive:function() {
             this.$el.find('li').removeClass('active')
@@ -62,7 +61,6 @@
             this.model = model
             this.view.render()
             this.view.init()
-
             this.bindEvents()
         },
         bindEvents:function(){
@@ -78,7 +76,9 @@
             this.titleEvents()
         },
         getSonglist:function(){
+            window.eventsHub.emit('loadIng')
             this.model.init().then(()=>{
+                window.eventsHub.emit('loadSuccess')
                 this.view.render(this.model.songlist)
             })
         },

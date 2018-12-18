@@ -107,12 +107,15 @@
                     url:$texts.eq(2).val(),
                     id:this.model.data.song.id
                 }
+                window.eventsHub.emit('loadIng')
                 if (this.model.data.song.id){
                     this.model.update(songData).then(()=>{
+                        window.eventsHub.emit('loadSuccess')
                         window.eventsHub.emit('upDataSong',JSON.parse(JSON.stringify(this.model.data.song)))
                     })
                 } else{
                     this.model.upLoad(songData).then(()=>{
+                        window.eventsHub.emit('loadSuccess')
                         window.eventsHub.emit('creatSong',JSON.parse(JSON.stringify(this.model.data.song)))
                     })
                 }

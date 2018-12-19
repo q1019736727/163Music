@@ -12,15 +12,22 @@
             data.map((song) => {
                 let $li = $(`
                 <li>
-                    <div class="singlesongWrapper">
-                        <span class="song">${song.song}</span>
-                        <span class="singer">${song.singer}</span>
-                        <span>
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#icon-play"></use>
-                            </svg>
-                        </span>
-                    </div>
+                    <a href="./song?id=${song.id}"+>
+                       <div class="singlesongWrapper">
+                            <span class="song">${song.song}</span>
+                            <span class="singer">${song.singer}</span>
+                            <span class="highquality">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-quality-high"></use>
+                                </svg>
+                            </span>
+                            <span class="play">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-play"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
                 </li>
             `)
                 this.$el.find('ol').append($li)

@@ -166,19 +166,30 @@ body{
           .singer{
             font-size: 12px;
             position: absolute;
-            left: 10px;
+            left: 28px;
             top: 13px;
             color: #888888;
           }
-          .icon{
-            fill: #aaaaaa;
-            right: 10px;
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            top: 50%;
-            margin-top: -11px;
+          .play{
+            .icon{
+              fill: #aaaaaa;
+              right: 10px;
+              position: absolute;
+              width: 22px;
+              height: 22px;
+              top: 50%;
+              margin-top: -11px;
+            }
           }
+          .highquality{
+            .icon{
+              fill: $theme-color;
+              left: 10px;
+              position: absolute;
+              top: 33px;
+            }
+          }
+
         }
       }
     }

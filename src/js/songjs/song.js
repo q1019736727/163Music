@@ -42,9 +42,7 @@
             this.model.getURL(id).then(()=>{
                 let audio = this.view.$el.find('audio')[0]
                 audio.src = this.model.data.song.url
-                setTimeout(()=>{
-                    audio.play()
-                },3000)
+                audio.play()
             })
         }
     }

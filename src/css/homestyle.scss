@@ -1,0 +1,187 @@
+*{padding: 0;margin: 0}
+*{box-sizing: border-box}
+*::before{box-sizing: border-box}
+*::after{box-sizing: border-box}
+ul,ol{list-style: none}
+li{list-style: none}
+a{color: inherit;text-decoration: none}
+.clearfix::after{content: '';display: block;clear: both}
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+$main-font:13px;
+$main-text-color:#333333;
+$theme-color: #d43c32;
+body{
+  background: white;
+}
+.top-nav{
+  background: white;
+  height: 110px;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  &::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: #cccccc;
+    -webkit-transform: scaleY(.5);
+    transform:scaleY(.5);
+  }
+  .logo{
+    height: 65px;
+    background: $theme-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    svg{
+      height: 25px;
+      margin-left: 15px;
+    }
+    a{
+      margin-right: 15px;
+      border: 1px solid white;
+      color: white;
+      background-color: inherit;
+      padding: 0 10px;
+      line-height: 30px;
+      border-radius: 15px;
+      font-size: $main-font;
+      font-weight: bold;
+    }
+  }
+  .menu-list{
+    ol{
+      height: 45px;
+      display: flex;
+      justify-content: space-around;
+      line-height: 45px;
+      li{
+        color: $main-text-color;
+        font-size: 15px;
+        &.active{
+          color: $theme-color;
+          &::after{
+            content: '';
+            display: block;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: $theme-color;
+            border-radius: 1px;
+            margin-top: -2px;
+          }
+        }
+      }
+    }
+  }
+}
+.page-Wrapper{
+  padding-top: 110px;
+  height: 100vh;
+  .page{
+    display: none;
+    &.active{
+      display: block;
+    }
+  }
+  #pageOne{
+    .recommand-title{
+      height: 55px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      span{
+        font-size: 17px;
+        color: $main-text-color;
+        padding-left: 10px;
+        position: relative;
+        &::before{
+          content: '';
+          display: block;
+          position: absolute;
+          height: 15px;
+          background: $theme-color;
+          width: 2px;
+          left: 0;
+          top: 4px;
+        }
+      }
+    }
+    .songcover-wrapper{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .song-cover{
+        width: 32%;
+        padding-bottom: 15px;
+        img{
+          width: 100%;
+        }
+        p{
+          width: 100%;
+          font-size: 13px;
+          color: $main-text-color;
+          margin-top: -13px;
+
+        }
+      }
+    }
+    ol{
+      li{
+        font-size: 15px;
+        color: $main-text-color;
+        &::after{
+          content: '';
+          display: block;
+          height: 1px;
+          background-color: #cccccc;
+          -webkit-transform: scaleY(.5);
+          transform:scaleY(.5);
+        }
+        .singlesongWrapper{
+          height: 55px;
+          line-height: 55px;
+          position: relative;
+          font-family: Helvetica, sans-serif;
+
+          .song{
+            margin-top: -13px;
+            padding-right: 45px;
+            padding-left: 10px;
+            position: absolute;
+            display:inline-block;             /*内联对象需加*/
+            width:100%;
+            white-space:nowrap;        /* 不换行 */
+            overflow:hidden;           /* 内容超出宽度时隐藏超出部分的内容 */
+            text-overflow:ellipsis;    /*溢出时显示省略标记...；需与overflow:hidden;一起使用*/
+          }
+          .singer{
+            font-size: 12px;
+            position: absolute;
+            left: 10px;
+            top: 13px;
+            color: #888888;
+          }
+          .icon{
+            fill: #aaaaaa;
+            right: 10px;
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            top: 50%;
+            margin-top: -11px;
+          }
+        }
+      }
+    }
+  }
+}
+

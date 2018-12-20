@@ -51,6 +51,8 @@ a{color: inherit;text-decoration: none}
       margin-top: 13vw;
       width: 70vw;
       height: 70vw;
+      max-width: 320px;
+      max-height: 320px;
       background: url("../img/disc.png") no-repeat center center;
       background-size: cover;
       display: flex;

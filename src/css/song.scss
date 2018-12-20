@@ -91,13 +91,24 @@ a{color: inherit;text-decoration: none}
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: circle 15s linear infinite;
+            &.active{
+              animation: circle 15s linear infinite;
+            }
+            &.play{
+              animation-play-state: running;
+            }
+            &.pause{
+              animation-play-state: paused;
+            }
             img{
               width: 45px;
               height: 45px;
-              visibility: hidden;
+              visibility: visible;
+              &.hidden{
+                visibility: hidden;
+              }
               &.active{
-                visibility: visible;
+                visibility: hidden;
               }
             }
           }

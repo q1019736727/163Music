@@ -3,6 +3,7 @@
         el: '#app',
         init() {
             this.$el = $(this.el)
+            this.audio = this.$el.find('audio')[0]
         },
         template: `
         `,
@@ -28,15 +29,19 @@
                 }
                 </style>
             `)
+            this.audio.src = data.url
+            this.$el.find('span>img').removeClass('hidden')
+            this.$el.find('.cover').addClass('active')
         },
         play(data){
-            this.$el.find('span>img').removeClass('active')
-            let audio = this.$el.find('audio')[0]
-            audio.src = data.url
-            audio.play()
+            this.$el.find('.cover').addClass('play').removeClass('pause')
+            this.$el.find('span>img').addClass('active')
+            this.audio.play()
         },
         pause(){
-            this.$el.find('span>img').addClass('active')
+            this.$el.find('.cover').addClass('pause').removeClass('play')
+            this.$el.find('span>img').removeClass('active')
+            this.audio.pause()
         }
 
     }
@@ -49,7 +54,8 @@
                 id: '',
                 lyrics: '',
                 cover: ''
-            }
+            },
+            status: 'pause'
         },
         getURL(id) {
             var query = new AV.Query('Songs');
@@ -73,7 +79,15 @@
             let id = window.location.search.split('=')[1]
             this.model.getURL(id).then(() => {
                 this.view.setBG(this.model.data.song)
-                this.view.play(this.model.data.song)
+            })
+            this.view.$el.on('click',()=>{
+                if (this.model.data.status === 'pause'){
+                    this.model.data.status = 'play'
+                    this.view.play()
+                }else {
+                    this.model.data.status = 'pause'
+                    this.view.pause()
+                }
             })
         }
     }

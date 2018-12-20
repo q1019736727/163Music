@@ -26,6 +26,17 @@ a{color: inherit;text-decoration: none}
   left: 0;
   top: 0;
   position: fixed;
+  .pointer{
+    background: url("../img/needle.png") no-repeat;
+    position: fixed;
+    left: 0;
+    top: 0;
+    left: 50%;
+    margin-left: -15px;
+    width: 90px;
+    height: 125px;
+    background-size: cover;
+  }
   .songPage{
     position: relative;
     overflow-scrolling: auto;
@@ -37,7 +48,7 @@ a{color: inherit;text-decoration: none}
       display: block;
       position: absolute;
       left: 0;
-      top: 0;
+      top: -70px;
       width: 100%;
       height: 100vh;
       filter: blur(6px);
@@ -51,22 +62,20 @@ a{color: inherit;text-decoration: none}
       top: 0;
       width: 100%;
       height: 100vh;
-      background-color: rgba(0,0,0,0.3);
     }
-    display: flex;
-    justify-content: center;
     .disc-wrapper{
-      margin-top: 13vw;
       width: 70vw;
       height: 70vw;
       max-width: 310px;
       max-height: 310px;
-      background: url("../img/disc_default.png") no-repeat center center;
+      //background: url("../img/disc_default.png") no-repeat center center;
       background-size: cover;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0 auto;
+      margin-top: 70px;
       .disc{
         width: 70vw;
         height: 70vw;
@@ -114,6 +123,14 @@ a{color: inherit;text-decoration: none}
           }
         }
       }
+    }
+    h4{
+      color: white;
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: 400;
     }
   }
 }

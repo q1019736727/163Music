@@ -32,6 +32,7 @@
             this.audio.src = data.url
             this.$el.find('span>img').removeClass('hidden')
             this.$el.find('.cover').addClass('active')
+            this.$el.find('h4').text(`${data.song}`)
         },
         play(data){
             this.$el.find('.cover').addClass('play').removeClass('pause')

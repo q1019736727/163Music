@@ -5,7 +5,9 @@
                 song:'',
                 singer:'',
                 url:'',
-                id:''
+                id:'',
+                cover:'',
+                lyrics:''
             }
         },
         upLoad:function(data) {
@@ -47,11 +49,18 @@
                 <div>
                     <label>外链</label><input type="text" value="__url__">
                 </div>
+                <div>
+                    <label>封面</label><input type="text" value="__cover__">
+                </div>
+                <div>
+                    <label style="vertical-align: top">歌词</label>
+                    <textarea style="font-size: 15px" cols="50" rows="10">__lyrics__</textarea>
+                </div>
                 <button class="save">保存</button>
             </form>
         `,
         render(data = {}){//ES6语法,如果data为undefined,就初始化一个空的对象
-            let titlarr = ['song','singer','url']
+            let titlarr = ['song','singer','url','cover','lyrics']
             let html = this.template
             titlarr.map((string)=>{
                 html = html.replace(`__${string}__`, data[string] || '')
@@ -66,13 +75,13 @@
         clearValue:function () {
             $(this.el).find('input[type=text]').val('')
         },
-        editValue({song,singer,url,id}){
+        editValue({song,singer,url,id,cover,lyrics}){
             if (id){
                 this.$el.find('h2').text('编辑歌曲')
             }else{
                 this.$el.find('h2').text('添加歌曲')
             }            let texts =  $(this.el).find('input[type=text]')
-            let titleArr = [song,singer,url]
+            let titleArr = [song,singer,url,cover,lyrics]
             titleArr.forEach((value,index)=>{
                 texts.eq(index).val(titleArr[index])
             })
@@ -101,11 +110,14 @@
             this.view.$el.on('submit','form',(e)=>{
                 e.preventDefault()
                 let $texts = this.view.$el.find('input[type=text]')
+                let textarea = this.view.$el.find('textarea')
                 let songData = {
                     song:$texts.eq(0).val(),
                     singer:$texts.eq(1).val(),
                     url:$texts.eq(2).val(),
-                    id:this.model.data.song.id
+                    id:this.model.data.song.id,
+                    cover: $texts.eq(3).val(),
+                    lyrics: textarea.val()
                 }
                 window.eventsHub.emit('loadIng')
                 if (this.model.data.song.id){
@@ -124,6 +136,7 @@
         },
         editSong(){
             window.eventsHub.on('songlistClick',(data)=>{
+                this.model.data.song = {}
                 Object.assign(this.model.data.song,data)
                 this.view.editValue(this.model.data.song)
             })

@@ -8,6 +8,9 @@
         `,
         render(){
 
+        },
+        setBG(data){
+            this.$el.append(`<style>.songPage::before{background:url(${data.cover}) no-repeat center center;background-size: cover;}</style>`);
         }
     }
     let model = {
@@ -16,7 +19,9 @@
                 song:'',
                 singer:'',
                 url:'',
-                id:''
+                id:'',
+                lyrics:'',
+                cover:''
             }
         },
         getURL(id){
@@ -42,7 +47,8 @@
             this.model.getURL(id).then(()=>{
                 let audio = this.view.$el.find('audio')[0]
                 audio.src = this.model.data.song.url
-                audio.play()
+                // audio.play()
+                this.view.setBG(this.model.data.song)
             })
         }
     }

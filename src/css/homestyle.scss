@@ -18,6 +18,7 @@ $theme-color: #d43c32;
 body{
   background: white;
 }
+html,body{-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}//解决移动端元素点击出现阴影
 .top-nav{
   background: white;
   height: 110px;

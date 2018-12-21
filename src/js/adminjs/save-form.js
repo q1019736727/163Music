@@ -80,11 +80,14 @@
                 this.$el.find('h2').text('编辑歌曲')
             }else{
                 this.$el.find('h2').text('添加歌曲')
-            }            let texts =  $(this.el).find('input[type=text]')
+            }
+            let texts =  $(this.el).find('input[type=text]')
+            let $textarea = $(this.el).find('textarea')
             let titleArr = [song,singer,url,cover,lyrics]
             titleArr.forEach((value,index)=>{
                 texts.eq(index).val(titleArr[index])
             })
+            $textarea.val(titleArr[4])
         }
     }
     let controller = {

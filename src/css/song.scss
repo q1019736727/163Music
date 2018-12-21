@@ -12,6 +12,8 @@ a{color: inherit;text-decoration: none}
   fill: currentColor;
   overflow: hidden;
 }
+html,body{-webkit-text-size-adjust: 100%;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100vh;}//解决移动端元素点击出现阴影
 @keyframes circle {
   0%{
     transform: rotate(0deg);
@@ -39,10 +41,10 @@ a{color: inherit;text-decoration: none}
   }
   .songPage{
     position: relative;
-    overflow-scrolling: auto;
     width: 100%;
     height: 100%;
     display: block;
+    tap-highlight-color: rgba(0, 0, 0, 0);
     &::before{
       content: '';
       display: block;
@@ -113,6 +115,7 @@ a{color: inherit;text-decoration: none}
               width: 45px;
               height: 45px;
               visibility: visible;
+              animation: none;
               &.hidden{
                 visibility: hidden;
               }
@@ -132,5 +135,24 @@ a{color: inherit;text-decoration: none}
       font-size: 16px;
       font-weight: 400;
     }
+    .lyrics-wrapper{
+      height: 100px;
+      overflow: hidden;
+      margin-top: 20px;
+      .lyrics-list{
+        width: 100%;
+        height: 100%;
+        transition: all .2s;
+        p{
+          color: #beb8b6;
+          text-align: center;
+          line-height: 25px;
+          &.active{
+            color: white;
+          }
+        }
+      }
+    }
   }
+
 }

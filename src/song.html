@@ -8,28 +8,29 @@
     <link rel="stylesheet" href="./css/song.css">
     <title>歌曲</title>
 </head>
-<body>
-<div class="site-fix">
-    <div id="app" class="songPage clearfix">
-        <div class="blurPage"></div>
-        <audio></audio>
-        <div class="disc-wrapper">
-            <div class="disc">
-                <div class="disc-light">
-                    <div class="cover pause">
-                        <span class="paly">
-                            <img class="hidden" src="./img/play.png" alt="">
-                        </span>
+<body ontouchstart="" onmouseover="">
+    <div class="site-fix">
+        <div id="app" class="songPage clearfix">
+            <div class="blurPage"></div>
+            <audio></audio>
+            <div class="disc-wrapper">
+                <div class="disc">
+                    <div class="disc-light">
+                        <div class="cover pause">
+                            <span class="paly">
+                                <img class="hidden" src="./img/play.png" alt="">
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <h4></h4>
+            <section class="lyrics-wrapper">
+                <div class="lyrics-list"></div>
+            </section>
         </div>
-        <h4></h4>
+        <section class="pointer"></section>
     </div>
-    <section class="pointer"></section>
-
-</div>
-
 </body>
 <script src="./vendor/av-min.js"></script>
 <script src="js/adminjs/leancloudinit.js"></script>

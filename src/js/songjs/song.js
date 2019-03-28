@@ -75,6 +75,7 @@
             return query.get(id).then((song) => {
                 // 成功获得实例
                 this.data.song = {...song.attributes}
+                console.log('歌曲信息',song)
             }, function (error) {
                 // 异常处理
             });

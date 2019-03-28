@@ -61,7 +61,7 @@
     let view = {
         el:'#upArea',
         template:`
-            <button class="upLoadButton" id="uploadButton">点击或拖曳文件<div>最多不超过20M</div></button>
+            <button class="upLoadButton" id="uploadButton">点击或拖曳文件<div>最多不超过20M</div><div>因七牛云测试域名过期，已不能上传</div></button>
         `,
         render(data){
             $(this.el).html(this.template)

@@ -2,7 +2,6 @@
 包含一个简易的Node服务器端
 
 [预览地址](https://q1019736727.github.io/163Music/src/)
-[管理地址](http://qiuyong.top/163Music/src/admin)
 
 ~~主要基于七牛云存储mp3歌曲~~，
 
